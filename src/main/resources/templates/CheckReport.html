@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Report</title> 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+</head>
+<body>
+
+ <form th:action="@{/show}" th:object="${report}" method="post">
+
+<div class="row g-2">
+  <div class="col-md-3">
+   <label for="floatingSelectGrid">Plan Name</label>
+    <div class="form-floating" >
+        <select class="form-select form-select-md mb-3" id="floatingSelectGrid" th:field="*{pname}">
+        <option selected value="">-select-</option>
+         <option th:each="data:${pname}" th:value="${data}" th:text="${data}"></option>
+      </select>
+    </div>
+  </div>
+  
+  <div class="col-md-3">
+  <label for="floatingSelectGrid">Plan Status</label>
+    <div class="form-floating" >
+      <select class="form-select form-select-md mb-3" id="floatingSelectGrid" th:field="*{pStatus}">
+        <option selected value="">-select-</option>
+        <option th:each="status:${pstatus}" th:value="${status}" th:text="${status}"></option>
+      </select>   
+    </div>
+  </div>
+  
+  <div class="col-md-3">
+  <label for="floatingSelectGrid">Gender</label>
+    <div class="form-floating ">
+        <select class="form-select form-select-md mb-3" id="floatingSelectGrid" th:field="*{gender}">
+        <option selected value="">-select-</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+      </select>
+    </div>
+  </div>
+  
+</div>
+<div class="row g-2">
+<div class="col-md-3">
+<label for="floatingSelectGrid">Start Date</label>
+    <div class="form-floating">
+<input type="date" class="form-control" th:field="*{sDate}"></div></div>
+<div class="col-md-3">
+<label for="floatingSelectGrid">End Date</label>
+    <div class="form-floating">
+<input type="date" class="form-control" th:field="*{edate}"></div></div>
+<div class="col-md-3 d-flex align-items-center">
+ <a href="/" class="btn btn-info">Reset</a>&nbsp; &nbsp; &nbsp; &nbsp;
+<button type="submit" class="btn btn-primary">Submit</button></div>
+</div>
+</form>
+<div>
+<table class="table" >
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">name</th>
+      <th scope="col">Gender</th>
+      <th scope="col">Plan Name </th>
+      <th scope="col">Plan Stauts </th>
+      <th scope="col">START_DATE</th>
+      <th scope="col">END_DATE</th>
+      <th scope="col">Benefit_Amount</th>     
+    </tr>
+  </thead>
+  <tbody>
+    <tr th:each="data:${res}">
+      <td th:text="${data.userId}"></td>
+      <td th:text="${data.userName}"></td>
+      <td th:text="${data.gender}"></td>
+      <td th:text="${data.planName}"></td>
+      <td th:text="${data.planStatus}"></td>
+      <td th:text="${data.Plan_Start_Date}"></td>
+      <td th:text="${data.Plan_End_Date}"></td>
+      <td th:text="${data.Benefit_Amount}"></td>
+    </tr>
+    <tr th:if="${#lists.isEmpty(res)}"><td class="text-center" colspan="8"> No Record Found</td></tr>
+    </table>
+    <div class="d-flex flex-row align-items-center justify-content-center">
+     <a href="#" class="text-warning ">Export PDf</a> &nbsp; &nbsp; &nbsp; &nbsp;
+      <a href="#" class="text-info ">Export excel</a>
+      </div> 
+      </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+
+</body>
+</html>
