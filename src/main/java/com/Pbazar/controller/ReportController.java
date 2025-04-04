@@ -13,6 +13,8 @@ import com.Pbazar.Binding.ServiceRequest;
 import com.Pbazar.Entity.ReportEntity;
 import com.Pbazar.service.ReportServiceImp;
 
+import jakarta.servlet.http.HttpServletResponse;
+
 @Controller
 public class ReportController {
 	@Autowired
@@ -43,4 +45,17 @@ public String showDetails(@ModelAttribute("report") ServiceRequest report,Model 
 	
 	return "CheckReport";
 }
+	@GetMapping("/excel")
+	public void excelExport(HttpServletResponse response,Model model ) throws Exception {
+		response.setContentType("application/octet-stream");
+		response.addHeader("Content-Disposition", "attachment;filename=Reportexcel.xls"); 
+		service.exportExcel(response);
+		
+	}
+	@GetMapping("/pdf")
+	public void pdfExport(HttpServletResponse response, Model model) throws Exception {
+		response.setContentType("application/pdf");
+		response.addHeader("Content-Disposition", "attachment;filename=Reportpdf.pdf"); 
+		service.exportPdf(response);
+	}
 }

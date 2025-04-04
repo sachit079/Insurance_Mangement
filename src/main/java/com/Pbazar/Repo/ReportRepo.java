@@ -15,7 +15,4 @@ public interface ReportRepo extends JpaRepository<ReportEntity,Integer>{
 	@Query(value="Select Distinct(planStatus) from ReportEntity")
 	public List<String> giveDistictPlanStatus();
 	
-	public List<ReportEntity> findByplanName(String name);
-	public List<ReportEntity> findByplanStatus(String name);
-	public List<ReportEntity> findBygender(String name);
 }
